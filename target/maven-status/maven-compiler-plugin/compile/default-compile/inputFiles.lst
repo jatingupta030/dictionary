@@ -1,0 +1,10 @@
+D:\work\DictionaryApp\src\main\java\com\dictionary\model\FeedMessage.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\service\NewsService.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\dao\impl\NewsDAOImpl.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\model\Feed.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\model\ReadTest.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\model\persistence\Word.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\model\RSSFeedParser.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\model\WordModel.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\dao\NewsDAO.java
+D:\work\DictionaryApp\src\main\java\com\dictionary\util\HibernateUtil.java
