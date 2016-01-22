@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Title Page</title>
+
+		<!-- Bootstrap CSS -->
+		<link href="css/app.min.css" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<style type="text/css">
+	html {
+    background-image: url('img/bg.jpg');
+    background-attachment: fixed;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}</style>
+	<body ng-app="demoApp">
+
+	
+
+<div class="container">
+	<div  role="tabpanel">
+	<div class="clearfix">
+	
+	<div ass="clearfix">
+		<p>&nbsp;</p>
+		</div>
+		
+		<div class="card">
+	
+			<div class="card-body">
+				<h1 ><p>Dictionary Admin</p></h1>
+				<hr>
+			  		<div   role="tablist">
+
+            <a href="#volume" aria-controls="home" role="tab" data-toggle="tab"  md-ink-ripple="" class="md-btn md-raised btn-lg   btn-fw blue waves-effect" ng-click="changeTab('volumes')">Volumes</a>
+       
+            <a href="#manage" aria-controls="tab" role="tab" data-toggle="tab"  md-ink-ripple="" class="md-btn md-raised btn-lg  btn-fw blue waves-effect" ng-click="changeTab('managevolumes')">Manage Volumes</a>
+       
+            <a href="#news" aria-controls="tab" role="tab" data-toggle="tab"  md-ink-ripple="" class="md-btn md-raised btn-lg   btn-fw blue waves-effect" ng-click="changeTab('news')">News</a>
+       
+            <a href="#new-word" aria-controls="tab" role="tab" data-toggle="tab"  md-ink-ripple="" class="md-btn md-raised btn-lg   btn-fw blue waves-effect" ng-click="changeTab('newlyeditedword')">Newly Edited Word</a>
+       </div>
+			</div>
+		</div>
+			</div>
+		
+
+		<div class="  clearfix">
+		<div class="card">
+			<div class="card-body">
+			<div class="tab-content">
+		<!-- panel 1 statrt -->
+
+        <div role="tabpanel" class="tab-pane active fade in" id="volume" ng-controller="VolumeCtrl" ng-if="tab=='volumes'">
+        <table class="table table-striped table-hover">
+					<thead class="bg-info">
+						<tr>
+							<th>
+								
+									<input type="checkbox" value="">
+								
+						</th>
+							<th>Icon</th>
+							<th>Name</th>
+							<th class="text-right">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="vol in volumes">
+							<td><label>
+									<input type="checkbox" value="{{vol.id}}" id="vol_{{vol.id}}">
+								</label></td>
+								<td><img ng-src="vol.icon"></td>
+								<td>{{vol.name}}</td>
+								<td class="text-right"><a  data-toggle="modal" href='#volume-edit' class="btn btn-sm btn-warning" ng-click="editClick(vol.id)">edit</a> <a href="#" class="btn btn-sm btn-danger" ng-click="delete(vol.id)">Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!--volume edit  modal -->
+				<div class="modal fade" id="volume-edit">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Edit Volume</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form" novalidate>
+								
+								<div class="form-group">
+									<label for="">Volume Title</label>
+									<input type="text" class="form-control" id=""  ng-model="volume.name" placeholder="Input field" reuired>
+								</div>
+								<div class="form-group">
+									<label for="">Volume icon</label>
+									<input type="file" name="" id="input" class="form-control" value="" required="required" title="" file-upload>
+									<span>{{volume.icon}}</span>
+								</div>
+							
+								
+							
+								<button  ng-click="save()"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" >Submit</button>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+        <!-- panel 1 end -->
+		
+		<!-- panel 2 statrt -->
+		
+  <div role="tabpanel" class="tab-pane fade" id="manage" ng-controller="ManageVolumeCtrl" ng-if="tab=='managevolumes'">
+        	<div class="row">
+        		<div class=" col-sm-3 col-md-3 col-lg-3">
+        			<h4>Category</h4>
+        		</div>
+        		<div class=" col-sm-6 col-md-6 col-lg-6">
+        			<!-- <select name="" id="input" class="form-control" required="required">
+        				<option value="">Select Category</option>
+        			</select> -->
+
+        		<select class="form-control col-md-2" name="category" ng-model="category" ng-change="onCategoryChange(category)">
+                <option value="" >Select Group</option>
+                <option ng-repeat="category in allCategory" value="{{category.name}}">{{category.name}}</option>
+
+                </select>
+        		</div>
+        		<div class=" col-sm-3 col-md-3 col-lg-3">
+        		<p class="visible-xs"></p>
+        			<a href="#" class="btn btn-success btn-block" >Add Category</a>
+        		</div>
+        	</div>
+
+        	<p>&nbsp;</p>
+        	<div class="table-responsive">
+        		
+        	
+        	<table class="table table-striped table-hover">
+        		<thead class="bg-info">
+        			<tr>
+        				<th class="col-sm-2">Word</th>
+        				<th class="col-sm-2">Meaning</th>
+        				<th class="col-sm-3">Description</th>
+        				<th class="col-sm-2">Category</th>
+        				<th class="col-sm-3 text-right">Action</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr ng-repeat="manageVol in allManageVolumes" ng-if="!isSearch">
+        				<td>{{manageVol.word}}</td>
+        				<td>{{manageVol.meaning}} </td>
+        				<td>{{manageVol.description}}</td>
+        				<td>{{manageVol.category}}</td>
+        				<td class="text-right"><a  data-toggle="modal" href='#editcontent' class="btn btn-sm btn-warning" ng-click="editClick(manageVol.id)">edit</a> <a href="#" class="btn btn-sm btn-danger" ng-click="deleteClick(manageVol.id)">Delete</a></td>
+        			</tr>
+        			<tr ng-repeat="manageVol in searchResults" ng-if="isSearch">
+        				<td>{{manageVol.word}}</td>
+        				<td>{{manageVol.meaning}} </td>
+        				<td>{{manageVol.description}}</td>
+        				<td>{{manageVol.category}}</td>
+        				<td class="text-right"><a  data-toggle="modal" href='#editcontent' class="btn btn-sm btn-warning" ng-click="editClick(manageVol.id)">edit</a> <a href="#" class="btn btn-sm btn-danger" ng-click="deleteClick(manageVol.id)">Delete</a></td>
+        			</tr>
+        		</tbody>
+        	</table>
+        	</div>
+        	<!-- modal for Manage Volume-->
+        	<div class="modal fade" id="editcontent">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Edit content</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form">
+							
+							<div class="form-group">
+								<label for="">Word</label>
+								<input type="text" class="form-control" id="" ng-model="manageVol.word" placeholder="Input field">
+							</div>
+							<div class="form-group">
+								<label for="">Meaning</label>
+									<input type="text" class="form-control" id="" ng-model="manageVol.meaning"  placeholder="Input field">					</div>
+							<div class="form-group">
+								<label for="">Description</label>
+									<input type="text" class="form-control" id="" ng-model="manageVol.description"  placeholder="Input field"></div>
+							<div class="form-group">
+								<label for="">Category</label>
+								<select class="form-control" name="category" ng-model="manageVol.category">
+	                              <option value="" disabled>Select Category</option>
+	                              <option  ng-repeat="category in allCategory" value="{{category.name}}">{{category.name}}</option>                          
+	                            </select>
+	                            <!-- <select class="form-control" name="category"  ng-model="selectedCategory" ng-change="onCategoryChange(selectedCategory)" ng-options="category.name for category in allCategory track by category.id" required>
+			                        <option value="" disabled>Select Category</option>
+			                    </select> -->
+                            </div>
+							<button type="submit"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- End Manage Modal-->
+        </div>
+
+        <!-- panel 3 end -->
+<div role="tabpanel" class="tab-pane fade" id="news" ng-controller="NewsCtrl" ng-if="tab=='news'">
+        	<div class="row">
+        		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        			<h4>News</h4>
+        		</div>
+        		
+        		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+        			<!--<a data-toggle="modal" href='javascript:save()' class="btn btn-success btn-block" >Add news</a>-->
+					<button type="button"   class="btn btn-success btn-block" ng-click="save()">Add News</button>
+        		</div>
+        	</div>
+
+        	<p>&nbsp;</p>
+        	<div class="table-responsive">
+        		
+        	
+        	<table class="table table-striped table-hover">
+        		<thead class="bg-info">
+        			<tr>
+        				<th class="col-sm-6">Title</th>
+        				<th class="col-sm-6">Description</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr ng-repeat="news in newes">
+        				<td>{{news.title}}</td>
+        				<td>{{news.description}}</td>
+        			</tr>
+        		</tbody>
+        	</table>
+        	</div>
+
+        	<!-- modal for news -->
+        	<div class="modal fade" id="add-news">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Add News</h4>
+						</div>
+						<div class="modal-body">
+							<form action="" method="POST" role="form">
+								
+								<div class="form-group">
+									<label for="">News Title</label>
+									<input type="text" class="form-control" id="" placeholder="Input field" ng-model="news.title">
+								</div>
+								<div class="form-group">
+									<label for="">News Description</label>
+										<input type="text" class="form-control" id="" placeholder="Input field" ng-model="news.description">					</div>
+								<button type="button"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="save()">Submit</button>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+        </div>
+
+        <!-- panel 3 end -->
+        <!-- panel 4 statrt -->
+        <div role="tabpanel" class="tab-pane fade" id="new-word" ng-controller="NewlyEditedWordCtrl" ng-if="tab=='newlyeditedword'">
+        	<div class="row">
+        		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        			<h4>New Edited Word</h4>
+        		</div>
+        		
+        		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+        			<a data-toggle="modal" href='#add-word'class="btn btn-success btn-block" >Add Edited Word</a>
+        		</div>
+        	</div>
+
+        	<p>&nbsp;</p>
+        	<div class="table-responsive">
+        		
+        	
+        	<table class="table table-striped table-hover">
+        		<thead class="bg-info">
+        			<tr>
+        				<th class="col-sm-2">Word</th>
+        				<th class="col-sm-3">Meaning</th>
+        				<th class="col-sm-4">Description</th>
+        				<th class="col-sm-3 text-right">Action</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        		<tr ng-repeat="newlyEditedWord in allNewlyEditedWordData">
+        				<td>{{newlyEditedWord.word}}</td>
+        				<td>{{newlyEditedWord.meaning}} </td>
+        				<td>{{newlyEditedWord.description}}</td>
+        				<td class="text-right"><a  data-toggle="modal" href='#add-word' class="btn btn-sm btn-warning" ng-click="editClick(newlyEditedWord.id)">edit</a> <a href="#" class="btn btn-sm btn-danger" ng-click="deleteClick(newlyEditedWord.id)">Delete</a></td>
+        			</tr>
+        		</tbody>
+        	</table>
+        	</div>
+        	<!-- Newly Edited Word Modal -->
+        	<div class="modal fade" id="add-word">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Add New Word</h4>
+						</div>
+						<div class="modal-body">
+							<form action="" method="POST" role="form">
+								
+								<div class="form-group">
+									<label for="">Word</label>
+									<input type="text" class="form-control" id="" ng-model="newlyEditedWord.word" placeholder="Input field">
+								</div>
+								<div class="form-group">
+									<label for="">Meaning </label>
+										<input type="text" class="form-control" id="" ng-model="newlyEditedWord.meaning" placeholder="Input field">					</div>
+										<div class="form-group">
+									<label for="">Description</label>
+										<input type="text" class="form-control" id="" ng-model="newlyEditedWord.description" placeholder="Input field">					</div>
+							
+							
+								
+							
+								<button type="submit"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+        	<!-- End Newly Edited Word Modal -->
+        </div>
+
+        <!-- panel 4 end -->
+
+			</div>				
+		</div>
+	</div>
+</div>
+		<!-- vendor library -->
+		<script src="js/lib/jquery.min.js"></script>
+		<script src="js/lib/angular.min.js"></script>
+		<script src="js/lib/bootstrap.min.js"></script>
+		<script src="js/lib/angular-ui-router.min.js"></script>
+		<script src="js/lib/ui-bootstrap.min.js"></script>
+
+		<!-- custom js  -->
+		<script src="js/app.js"></script>
+		<script src="js/constant.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/controllers/VolumeCtrl.js"></script>
+		<script src="js/controllers/ManageVolumeCtrl.js"></script>
+		<script src="js/controllers/NewsCtrl.js"></script>
+		<script src="js/controllers/NewlyEditedWordCtrl.js"></script>
+		<script src="js/services/volumeSvc.js"></script>
+		<script src="js/services/manageVolumeSvc.js"></script>
+		<script src="js/services/newsSvc.js"></script>
+		<script src="js/services/newlyEditedWordSvc.js"></script>
+	</body>
+</html>

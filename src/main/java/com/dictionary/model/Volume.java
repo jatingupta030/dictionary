@@ -15,9 +15,9 @@ public class Volume implements Serializable{
     int volumeID ;
     String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "volume")
+    /*@OneToMany(mappedBy = "volume")
     List<Word> words = new ArrayList<Word>();
-
+*/
     public int getVolumeID() {
         return volumeID;
     }
@@ -34,11 +34,11 @@ public class Volume implements Serializable{
         this.name = name;
     }
 
-    public List<Word> getWords() {
+  /*  public List<Word> getWords() {
         return words;
     }
 
     public void setWords(List<Word> words) {
         this.words = words;
-    }
+    }*/
 }

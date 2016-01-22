@@ -13,4 +13,5 @@ import java.util.List;
 public interface VolumeDAO {
     List<Volume> fetchVolumes();
     Volume getVolumeDetail(int id);
+    Volume addVolume(Volume volume);
 }

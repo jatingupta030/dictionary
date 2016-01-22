@@ -3,13 +3,16 @@ package com.dictionary.service;
 import com.dictionary.dao.NewsDAO;
 import com.dictionary.dao.impl.NewsDAOImpl;
 import com.dictionary.model.FeedMessage;
+import com.dictionary.model.Result;
 import com.dictionary.model.Word;
 import com.dictionary.util.HibernateUtil;
 import org.hibernate.Session;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,20 +22,23 @@ import java.util.List;
 @Path("/service/news")
 public class NewsService {
 
-    @GET
+    @POST
     @Path("/post")
-    public Response postFeeds(){
+    @Produces(MediaType.APPLICATION_JSON)
+    public Result postFeeds(){
        NewsDAO newsDAO = new NewsDAOImpl();
         String response = newsDAO.postFeeds();
-        return Response.status(200).entity(response).build();
+        Result result = new Result();
+        result.setMessage(response);
+        return result;
     }
 
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<FeedMessage> fetchFeeds(){
+    public ArrayList<FeedMessage> fetchFeeds(){
         NewsDAO newsDAO = new NewsDAOImpl();
-        return newsDAO.fetchFeeds();
+        return (ArrayList<FeedMessage>)newsDAO.fetchFeeds();
     }
 
 }

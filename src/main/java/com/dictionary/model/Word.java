@@ -16,9 +16,9 @@ public class Word implements Serializable{
     String meaning;
     String description;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "volume")
-    Volume volume;
+    Volume volume;*/
 
     public int getWordID() {
         return wordID;
@@ -60,11 +60,11 @@ public class Word implements Serializable{
         this.description = description;
     }
 
-    public Volume getVolume() {
+    /*public Volume getVolume() {
         return volume;
     }
 
     public void setVolume(Volume volume) {
         this.volume = volume;
-    }
+    }*/
 }

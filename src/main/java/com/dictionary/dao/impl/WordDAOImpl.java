@@ -57,7 +57,7 @@ public class WordDAOImpl implements WordDAO{
                 newWord.setMeaning(word.getMeaning());
                 newWord.setDescription(word.getDescription());
                 newWord.setPronunciation(word.getPronunciation());
-                newWord.setVolume(word.getVolume());
+               // newWord.setVolume(word.getVolume());
                 session.update(newWord);
                 session.getTransaction().commit();
                 session.close();

@@ -43,4 +43,19 @@ public class VolumeDAOImpl implements VolumeDAO {
         }
         return volume;
     }
+
+    public Volume addVolume(Volume volume){
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            if(volume != null) {
+                session.save(volume);
+            }
+            session.getTransaction().commit();
+            session.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return volume;
+    }
 }

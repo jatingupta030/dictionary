@@ -41,4 +41,16 @@ public class VolumeService {
         return null;
     }
 
+    @POST
+    @Path("/post")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Volume getVolumeDetail(Volume volume){
+        VolumeDAO volumeDAO = new VolumeDAOImpl();
+        if(volumeDAO != null){
+            return volumeDAO.addVolume(volume);
+        }
+        return null;
+    }
+
 }

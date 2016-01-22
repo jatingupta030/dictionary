@@ -24,6 +24,8 @@
         <!-- Mapping files -->
         <mapping class="com.dictionary.model.FeedMessage"/>
         <mapping class="com.dictionary.model.Word"/>
+        <mapping class="com.dictionary.model.EditedWord"/>
+        <mapping class="com.dictionary.model.Volume"/>
     </session-factory>
 
 </hibernate-configuration>
