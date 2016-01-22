@@ -1,9 +1,6 @@
 package com.dictionary.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -18,6 +15,10 @@ public class Word implements Serializable{
     String pronunciation;
     String meaning;
     String description;
+
+    @ManyToOne
+    @JoinColumn(name = "volume")
+    Volume volume;
 
     public int getWordID() {
         return wordID;
@@ -59,5 +60,11 @@ public class Word implements Serializable{
         this.description = description;
     }
 
+    public Volume getVolume() {
+        return volume;
+    }
 
+    public void setVolume(Volume volume) {
+        this.volume = volume;
+    }
 }

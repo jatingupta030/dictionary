@@ -1,10 +1,9 @@
 package com.dictionary.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jatin on 1/22/2016.
@@ -15,6 +14,9 @@ public class Volume implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     int volumeID ;
     String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "volume")
+    List<Word> words = new ArrayList<Word>();
 
     public int getVolumeID() {
         return volumeID;
@@ -30,5 +32,13 @@ public class Volume implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Word> getWords() {
+        return words;
+    }
+
+    public void setWords(List<Word> words) {
+        this.words = words;
     }
 }
