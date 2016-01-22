@@ -6,6 +6,7 @@ import com.dictionary.dao.impl.EditedWordDAOImpl;
 import com.dictionary.dao.impl.NewsDAOImpl;
 import com.dictionary.model.EditedWord;
 import com.dictionary.model.FeedMessage;
+import com.dictionary.model.Result;
 import com.dictionary.model.Word;
 import com.dictionary.util.HibernateUtil;
 import org.hibernate.Session;
@@ -44,12 +45,13 @@ public class EditedWordService {
 
     @POST
     @Path("/delete/{id}")
-    public Response deleteEditedWords(@PathParam("id") String id){
+    @Produces(MediaType.APPLICATION_JSON)
+    public Result deleteEditedWords(@PathParam("id") String id){
         EditedWordDAO editedWordDAO = new EditedWordDAOImpl();
-        String result = "ERROR";
+        Result result = new Result();
         if(id != null)
-            result = editedWordDAO.deleteEditedWord(Integer.parseInt(id));
-        return Response.status(201).entity(result).build();
+            result.setMessage(editedWordDAO.deleteEditedWord(Integer.parseInt(id)));
+        return result;
     }
 
 

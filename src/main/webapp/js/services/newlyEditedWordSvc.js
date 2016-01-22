@@ -14,7 +14,8 @@ angular.module('demoApp')
       };
 
       newlyEditedWordSvc.deletedNewlyEditedWord = function(id){
-       return $http.post(servicePath.deletedNewlyEditedWord,{id:id})
+    	var url = servicePath.deletedNewlyEditedWord + id  
+       return $http.post(url)
             .then(function(res){
               return res.data;
             })
@@ -24,7 +25,7 @@ angular.module('demoApp')
       }
       
       newlyEditedWordSvc.updateNewlyEditedWord = function(newlyEditedWord){
-        return $http.post(servicePath.updateNewlyEditedWord, newlyEditedWord)
+    	return $http.post(servicePath.updateNewlyEditedWord, newlyEditedWord)
         .then(function(res){
           return res.data;
         })
@@ -32,6 +33,16 @@ angular.module('demoApp')
           throw err;
         });
       };
+      
+      newlyEditedWordSvc.addNewlyEditedWord = function(newlyEditedWord){
+          return $http.post(servicePath.addNewlyEditedWord, newlyEditedWord)
+          .then(function(res){
+            return res.data;
+          })
+          .catch(function(err){
+            throw err;
+          });
+        };
 
       return newlyEditedWordSvc;
   }])

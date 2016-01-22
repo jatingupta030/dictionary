@@ -19,6 +19,7 @@ servicePath["getCategory"] = "/DictionaryApp/json/category.json";
 servicePath["updateManageVol"] = "/DictionaryApp/api/managevol/save";
 servicePath["deleteManageVol"] = "/DictionaryApp/api/managevol/delete";
 
-servicePath["getnewlyEditedWordData"] = "/json/newlyEditedWord.json";
-servicePath["updateNewlyEditedWord"] = "/api/newlyedited/save";
-servicePath["deletedNewlyEditedWord"] = "/api/newlyedited/delete";
+servicePath["getnewlyEditedWordData"] = "/DictionaryApp/rest/service/edited/word/";
+servicePath["updateNewlyEditedWord"] = "/DictionaryApp/rest/service/edited/word/update";
+servicePath["deletedNewlyEditedWord"] = "/DictionaryApp/rest/service/edited/word/delete/";
+servicePath["addNewlyEditedWord"] = "/DictionaryApp/rest/service/edited/word/"
