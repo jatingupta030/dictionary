@@ -5,6 +5,7 @@ import com.dictionary.dao.VolumeDAO;
 import com.dictionary.dao.impl.NewsDAOImpl;
 import com.dictionary.dao.impl.VolumeDAOImpl;
 import com.dictionary.model.FeedMessage;
+import com.dictionary.model.Result;
 import com.dictionary.model.Volume;
 import com.dictionary.model.Word;
 import com.dictionary.util.HibernateUtil;
@@ -42,15 +43,38 @@ public class VolumeService {
     }
 
     @POST
-    @Path("/post")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Volume getVolumeDetail(Volume volume){
+    public Volume addVolume(Volume volume){
         VolumeDAO volumeDAO = new VolumeDAOImpl();
         if(volumeDAO != null){
             return volumeDAO.addVolume(volume);
         }
         return null;
     }
-
+    
+    @POST
+    @Path("/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Volume updateVolume(Volume volume){
+        VolumeDAO volumeDAO = new VolumeDAOImpl();
+        if(volumeDAO != null){
+            return volumeDAO.updateVolume(volume);
+        }
+        return null;
+    }
+    
+    @POST
+    @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Result deleteVolume(@PathParam("id") String id){
+        VolumeDAO volumeDAO = new VolumeDAOImpl();
+        Result result = new Result();
+        if(volumeDAO != null){
+        	result.setMessage(volumeDAO.deleteVolume(Integer.parseInt(id)));
+        }
+        return result;
+    }
 }

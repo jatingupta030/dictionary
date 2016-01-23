@@ -23,7 +23,7 @@ import java.util.List;
 public class NewsService {
 
     @POST
-    @Path("/post")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public Result postFeeds(){
        NewsDAO newsDAO = new NewsDAOImpl();
@@ -34,7 +34,7 @@ public class NewsService {
     }
 
     @GET
-    @Path("/all")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<FeedMessage> fetchFeeds(){
         NewsDAO newsDAO = new NewsDAOImpl();

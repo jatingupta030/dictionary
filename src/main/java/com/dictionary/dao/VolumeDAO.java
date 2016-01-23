@@ -1,6 +1,5 @@
 package com.dictionary.dao;
 
-import com.dictionary.model.FeedMessage;
 import com.dictionary.model.Volume;
 
 import java.util.List;
@@ -14,4 +13,6 @@ public interface VolumeDAO {
     List<Volume> fetchVolumes();
     Volume getVolumeDetail(int id);
     Volume addVolume(Volume volume);
+    Volume updateVolume(Volume voulme);
+    String deleteVolume(int id);
 }

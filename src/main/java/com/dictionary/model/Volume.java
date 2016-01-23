@@ -15,9 +15,6 @@ public class Volume implements Serializable{
     int volumeID ;
     String name;
 
-    /*@OneToMany(mappedBy = "volume")
-    List<Word> words = new ArrayList<Word>();
-*/
     public int getVolumeID() {
         return volumeID;
     }
@@ -34,11 +31,4 @@ public class Volume implements Serializable{
         this.name = name;
     }
 
-  /*  public List<Word> getWords() {
-        return words;
-    }
-
-    public void setWords(List<Word> words) {
-        this.words = words;
-    }*/
 }

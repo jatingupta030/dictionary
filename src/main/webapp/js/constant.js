@@ -1,23 +1,22 @@
 var servicePath = {};
 servicePath["fileUpload"] = "/api/file/save";
 
-servicePath["getVolumes"] = "/DictionaryApp/json/volume.json";
+servicePath["getVolumes"] = "/DictionaryApp/rest/service/volume/";
 
-/* for create and update
- if there is id then it is update
- otherwise create
-*/
-servicePath["saveVolume"] = "/DictionaryApp/service/volume/post";
-servicePath["deleteVolume"] = "/DictionaryApp/api/volume/delete";
+
+servicePath["saveVolume"] = "/DictionaryApp/rest/service/volume/";
+servicePath["deleteVolume"] = "/DictionaryApp/rest/service/volume/delete/";
+servicePath["updateVolume"] = "/DictionaryApp/rest/service/volume/update";
 
 //news services
-servicePath["getNewes"] = "/DictionaryApp/rest/service/news/all";
-servicePath["saveNews"] = "/DictionaryApp/rest/service/news/post";
+servicePath["getNewes"] = "/DictionaryApp/rest/service/news/";
+servicePath["saveNews"] = "/DictionaryApp/rest/service/news/";
 
-servicePath["getManageVolume"] = "/DictionaryApp/json/manageVolume.json";
-servicePath["getCategory"] = "/DictionaryApp/json/category.json";
-servicePath["updateManageVol"] = "/DictionaryApp/api/managevol/save";
-servicePath["deleteManageVol"] = "/DictionaryApp/api/managevol/delete";
+servicePath["getManageVolume"] = "/DictionaryApp/rest/service/word/";
+servicePath["getCategory"] = "/DictionaryApp/rest/service/volume/";
+servicePath["updateManageVol"] = "/DictionaryApp/rest/service/word/update";
+servicePath["deleteManageVol"] = "/DictionaryApp/rest/service/word/delete/";
+servicePath["addDictionaryWord"] = "/DictionaryApp/rest/service/word/";
 
 servicePath["getnewlyEditedWordData"] = "/DictionaryApp/rest/service/edited/word/";
 servicePath["updateNewlyEditedWord"] = "/DictionaryApp/rest/service/edited/word/update";

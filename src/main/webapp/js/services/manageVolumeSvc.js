@@ -24,7 +24,8 @@ angular.module('demoApp')
       };
 
       manageVolumeSvc.deleteManageVol = function(id){
-       return $http.post(servicePath.deleteManageVol,{id:id})
+    	var url = servicePath.deleteManageVol + id;  
+       return $http.post(url)
             .then(function(res){
               return res.data;
             })
@@ -32,7 +33,15 @@ angular.module('demoApp')
                throw err;
             });
       }
-      
+      manageVolumeSvc.addDictionaryWord = function(manageVol){
+          return $http.post(servicePath.addDictionaryWord, manageVol)
+          .then(function(res){
+            return res.data;
+          })
+          .catch(function(err){
+            throw err;
+          });
+        };
       /*manageVolumeSvc.addManageVolumes = function(manageVol){
         return $http.post(path,product);
       };*/

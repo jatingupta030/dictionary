@@ -1,6 +1,8 @@
 package com.dictionary.dao.impl;
 
+import com.dictionary.dao.VolumeDAO;
 import com.dictionary.dao.WordDAO;
+import com.dictionary.model.Volume;
 import com.dictionary.model.Word;
 import com.dictionary.util.HibernateUtil;
 import org.hibernate.Query;
@@ -15,13 +17,23 @@ public class WordDAOImpl implements WordDAO{
 
     public List<Word> fetchWords(){
         List<Word> words = null;
-        try{
+        VolumeDAO volumeDAO = new VolumeDAOImpl();
+        Volume vol = null;
+    	try{
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            String hql = "FROM EditedWord";
+            String hql = "FROM Word";
             Query query = session.createQuery(hql);
             words = query.list();
             session.close();
+            if(words != null && words.size() > 0){
+            	for(Word word : words){
+            		vol = volumeDAO.getVolumeDetail(word.getVolumeID());
+            		if(vol != null){
+                    	word.setVolume(vol);
+                    }
+            	}
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -57,7 +69,7 @@ public class WordDAOImpl implements WordDAO{
                 newWord.setMeaning(word.getMeaning());
                 newWord.setDescription(word.getDescription());
                 newWord.setPronunciation(word.getPronunciation());
-               // newWord.setVolume(word.getVolume());
+                newWord.setVolumeID(word.getVolumeID());
                 session.update(newWord);
                 session.getTransaction().commit();
                 session.close();

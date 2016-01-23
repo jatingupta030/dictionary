@@ -18,7 +18,7 @@ public class VolumeDAOImpl implements VolumeDAO {
         try{
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            String hql = "FROM EditedWord";
+            String hql = "FROM Volume";
             Query query = session.createQuery(hql);
             volumeList = query.list();
             session.close();
@@ -33,7 +33,7 @@ public class VolumeDAOImpl implements VolumeDAO {
         try{
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            String hql = "FROM Volumewhere volumeID = :id";
+            String hql = "FROM Volume where volumeID = :id";
             Query query = session.createQuery(hql);
             query.setInteger("id", id);
             volume = (Volume) query.uniqueResult();
@@ -57,5 +57,46 @@ public class VolumeDAOImpl implements VolumeDAO {
             e.printStackTrace();
         }
         return volume;
+    }
+    
+    public Volume updateVolume(Volume volume){
+        Volume editedVolume = null;
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            String queryString = "from Volume where volumeID = :id";
+            Query query = session.createQuery(queryString);
+            query.setInteger("id", volume.getVolumeID());
+            editedVolume =(Volume) query.uniqueResult();
+            if(editedVolume != null && volume != null) {
+            	editedVolume.setName(volume.getName());
+            	session.update(editedVolume);
+                session.getTransaction().commit();
+                session.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return editedVolume;
+
+    }
+    
+    public String deleteVolume(int id){
+    	String result = "ERROR";
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            String queryString = "from Volume where volumeID = :id";
+            Query query = session.createQuery(queryString);
+            query.setInteger("id", id);
+            Volume volume =(Volume) query.uniqueResult();
+            session.delete(volume);
+            session.getTransaction().commit();
+            session.close();
+            result = "SUCCESS";
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 }

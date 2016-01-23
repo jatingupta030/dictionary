@@ -15,7 +15,11 @@ public class Word implements Serializable{
     String pronunciation;
     String meaning;
     String description;
+    int volumeID;
 
+    @Transient
+    Volume volume;
+    
     /*@ManyToOne
     @JoinColumn(name = "volume")
     Volume volume;*/
@@ -60,11 +64,19 @@ public class Word implements Serializable{
         this.description = description;
     }
 
-    /*public Volume getVolume() {
+    public int getVolumeID() {
+		return volumeID;
+	}
+
+	public void setVolumeID(int volumeID) {
+		this.volumeID = volumeID;
+	}
+
+	public Volume getVolume() {
         return volume;
     }
 
     public void setVolume(Volume volume) {
         this.volume = volume;
-    }*/
+    }
 }

@@ -6,6 +6,7 @@ angular.module('demoApp')
 	$scope.allCategory = [];
 	$scope.manageVol = {};
 	$scope.isSearch = false;
+	$scope.isEditMode= false;
 	var managev = this;
 
 	managev.getManageVol = function(){
@@ -15,8 +16,10 @@ angular.module('demoApp')
 		    throw err;
 	    });
 	}
+	
 	managev.getManageVol();
-    manageVolumeSvc.getCategory().then(function(response){
+    
+	manageVolumeSvc.getCategory().then(function(response){
 	    $scope.allCategory = response;
 	}).catch(function(err){
 	   	throw err;
@@ -24,8 +27,11 @@ angular.module('demoApp')
 
 	$scope.editClick = function(id){
 		$scope.allManageVolumes.forEach(function(item, index, arr){
-			if(id == item.id)
+			if(id == item.wordID){
+				$scope.isEditMode = true;
 				$scope.manageVol = item;
+			}
+				
 		});
 	}
 
@@ -33,13 +39,24 @@ angular.module('demoApp')
 		if(evt){
 	      evt.preventDefault();
 	    }
-		manageVolumeSvc.updateManageVolumes($scope.manageVol).then(function(result){
-			$('#editcontent').modal("hide");
-			alert(result);
-			managev.getManageVol();
-	      }).catch(function(err){
-		    throw err;
-	    });
+		if($scope.isEditMode){
+			manageVolumeSvc.updateManageVolumes($scope.manageVol).then(function(result){
+				$('#editcontent').modal("hide");
+				alert(result);
+				managev.getManageVol();
+		      }).catch(function(err){
+			    throw err;
+		    });
+		}else{
+			manageVolumeSvc.addDictionaryWord($scope.manageVol).then(function(result){
+				$('#editcontent').modal("hide");
+				alert(result);
+				managev.getManageVol();
+		      }).catch(function(err){
+			    throw err;
+		    });
+		}
+		$scope.isEditMode = false;
 	}
 
 	$scope.deleteClick = function(id){

@@ -24,8 +24,9 @@ angular.module('demoApp')
 		        });
       }
 
-       volumeSvc.delete = function(id){
-  		 return $http.post(servicePath.deleteVolume,{id:id})
+       volumeSvc.deleteVolume = function(id){
+    	   var url = servicePath.deleteVolume + id;
+  		 return $http.post(url)
 		        .then(function(res){
 		        	return res.data;
 		        })
@@ -33,6 +34,14 @@ angular.module('demoApp')
 		        	 throw err;
 		        });
       }
-
+   volumeSvc.update = function(vol){
+		 return $http.post(servicePath.updateVolume, vol)
+	        .then(function(res){
+	        	return res.data;
+	        })
+	        .catch(function(err){
+	        	 throw err;
+	        });
+    }
       return volumeSvc;
   }])
