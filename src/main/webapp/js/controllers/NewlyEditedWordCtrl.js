@@ -32,7 +32,7 @@ angular.module('demoApp')
 		if($scope.isEditMode){
 			newlyEditedWordSvc.updateNewlyEditedWord($scope.newlyEditedWord).then(function(result){
 				$('#add-word').modal("hide");
-				alert("Record Successfully Updated");
+				alert("Word Successfully Updated");
 				newlyWord.getNewlyEditedWord();
 		      }).catch(function(err){
 			    throw err;
@@ -40,7 +40,7 @@ angular.module('demoApp')
 		}else{
 			newlyEditedWordSvc.addNewlyEditedWord($scope.newlyEditedWord).then(function(result){
 				$('#add-word').modal("hide");
-				alert("Record Successfully Added");
+				alert("Word Successfully Added");
 				newlyWord.getNewlyEditedWord();
 		      }).catch(function(err){
 			    throw err;
@@ -53,7 +53,7 @@ angular.module('demoApp')
 	$scope.deleteClick = function(id){
 	 	newlyEditedWordSvc.deletedNewlyEditedWord(id)
 	 	.then(function(result){
-	 		alert(result.message + " In Deleting Record");
+	 		alert(result.message + " In Deleting Word");
 	 		newlyWord.getNewlyEditedWord();
 	 	})
 	 	.catch(function(res){

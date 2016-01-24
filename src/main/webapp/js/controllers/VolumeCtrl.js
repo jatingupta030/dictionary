@@ -12,7 +12,7 @@ angular.module('demoApp')
 		  	$scope.volumes = volms;
 		  })
 		  .catch(function(res){
-		  	alert("error in getting volume");
+		  	alert("Error in Getting Volumes");
 		  });
   }
 
@@ -32,11 +32,15 @@ $scope.save = function(){
  	if(icon.file){
  		uploadSvc.upload(icon.file)
  		.then(function(res){
- 			vol.icon = res.data;
- 			vm.save(vol);
+ 			if(res.data.message != "ERROR"){
+ 				vol.icon = res.data.message;
+ 	 			vm.save(vol);
+ 			}else{
+ 				alert("Error in file Upload")
+ 			}
  		})
  		.catch(function(res){
- 			alert("error in file upload");
+ 			alert("Error in file Upload");
  		});
  	}else{
  		vm.save(vol);
@@ -49,23 +53,23 @@ vm.save = function(vol){
 		volumeSvc.update(vol)
 	 	.then(function(res){
 	 		$('#volume-edit').modal("hide");
-	 		alert("volume updated successfuly");
+	 		alert("Volume Updated Successfully");
 	 		vm.getVolumes();
 	 	})
 	 	.catch(function(){
 	 		$('#volume-edit').modal("hide");
-	 		alert("error in getting volume update");
+	 		alert("Error in Volume Update");
 	 	});
 	}else{
 		volumeSvc.save(vol)
 	 	.then(function(res){
 	 		$('#volume-edit').modal("hide");
-	 		alert("volume updated successfuly");
+	 		alert("Volume Saved Successfuly");
 	 		vm.getVolumes();
 	 	})
 	 	.catch(function(){
 	 		$('#volume-edit').modal("hide");
-	 		alert("error in getting volume update");
+	 		alert("Error in Saving Volume");
 	 	});
 	}
 	$scope.isEditMode=false;
@@ -73,11 +77,11 @@ vm.save = function(vol){
  $scope.deleteVolume = function(id){
  	volumeSvc.deleteVolume(id)
  	.then(function(){
- 		alert("volume deleted successfuly");
+ 		alert("Volume Deleted Successfully");
  		vm.getVolumes();
  	})
  	.catch(function(res){
- 		alert("error in volume deletion");
+ 		alert("Error in Volume Deletion");
  	});
  }
 

@@ -31,7 +31,6 @@ angular.module('demoApp')
 				$scope.isEditMode = true;
 				$scope.manageVol = item;
 			}
-				
 		});
 	}
 
@@ -42,18 +41,20 @@ angular.module('demoApp')
 		if($scope.isEditMode){
 			manageVolumeSvc.updateManageVolumes($scope.manageVol).then(function(result){
 				$('#editcontent').modal("hide");
-				alert(result);
+				alert("Word Successfully Updated");
 				managev.getManageVol();
 		      }).catch(function(err){
 			    throw err;
+			    alert("Error in Word Updation");
 		    });
 		}else{
 			manageVolumeSvc.addDictionaryWord($scope.manageVol).then(function(result){
 				$('#editcontent').modal("hide");
-				alert(result);
+				alert("Word Successfully Added");
 				managev.getManageVol();
 		      }).catch(function(err){
 			    throw err;
+			    alert("Error in Word Addition");
 		    });
 		}
 		$scope.isEditMode = false;
@@ -62,11 +63,11 @@ angular.module('demoApp')
 	$scope.deleteClick = function(id){
 	 	manageVolumeSvc.deleteManageVol(id)
 	 	.then(function(result){
-	 		alert(result);
+	 		alert(result.message + " In Deleting Word");
 	 		managev.getManageVol();
 	 	})
 	 	.catch(function(res){
-	 		alert("error in volume deletion");
+	 		alert("Error in Word Deletion");
 	 	});
  	}
 
@@ -78,7 +79,7 @@ angular.module('demoApp')
 	    }
 		$scope.searchResults = [];
 	    $scope.searchResults = $scope.allManageVolumes.filter(function(d){
-	        return category == d.category;
+	        return category == d.volumeID;
 	    });
   	}
 }]);

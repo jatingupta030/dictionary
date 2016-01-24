@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Title Page</title>
+		<title>Dictionary Application</title>
 
 		<!-- Bootstrap CSS -->
 		<link href="css/app.min.css" rel="stylesheet">
@@ -73,11 +73,6 @@
         <table class="table table-striped table-hover">
 					<thead class="bg-info">
 						<tr>
-							<th>
-								
-									<input type="checkbox" value="">
-								
-						</th>
 							<th>Icon</th>
 							<th>Name</th>
 							<th class="text-right">Action</th>
@@ -85,10 +80,7 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="vol in volumes">
-							<td><label>
-									<input type="checkbox" value="{{vol.volumeID}}" id="vol_{{vol.volumeID}}">
-								</label></td>
-								<td><img ng-src="vol.icon"></td>
+								<td><img ng-src="{{staticPath}}{{vol.icon}}" width="100px"></td>
 								<td>{{vol.name}}</td>
 								<td class="text-right"><a  data-toggle="modal" href='#volume-edit' class="btn btn-sm btn-warning" ng-click="editClick(vol.volumeID)">edit</a> <a href="#" class="btn btn-sm btn-danger" ng-click="deleteVolume(vol.volumeID)">Delete</a></td>
 						</tr>
@@ -101,7 +93,8 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Edit Volume</h4>
+							<h4 class="modal-title" ng-if="isEditMode">Edit Volume</h4>
+							<h4 class="modal-title" ng-if="!isEditMode">Add Volume</h4>
 						</div>
 						<div class="modal-body">
 							<form role="form" novalidate>
@@ -115,9 +108,6 @@
 									<input type="file" name="" id="input" class="form-control" value="" required="required" title="" file-upload>
 									<span>{{volume.icon}}</span>
 								</div>
-							
-								
-							
 								<button  ng-click="save()"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" >Submit</button>
 							</form>
 						</div>
@@ -176,10 +166,10 @@
         				<td class="text-right"><a  data-toggle="modal" href='#editcontent' class="btn btn-sm btn-warning" ng-click="editClick(manageVol.wordID)">edit</a> <a href="#" class="btn btn-sm btn-danger" ng-click="deleteClick(manageVol.wordID)">Delete</a></td>
         			</tr>
         			<tr ng-repeat="manageVol in searchResults" ng-if="isSearch">
-        				<td>{{manageVol.word}}</td>
+        				<td>{{manageVol.name}}</td>
         				<td>{{manageVol.meaning}} </td>
         				<td>{{manageVol.description}}</td>
-        				<td>{{manageVol.category}}</td>
+        				<td>{{manageVol.volume.name}}</td>
         				<td class="text-right"><a  data-toggle="modal" href='#editcontent' class="btn btn-sm btn-warning" ng-click="editClick(manageVol.wordID)">edit</a> <a href="#" class="btn btn-sm btn-danger" ng-click="deleteClick(manageVol.wordID)">Delete</a></td>
         			</tr>
         		</tbody>
@@ -191,7 +181,8 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Edit content</h4>
+						<h4 class="modal-title" ng-if="isEditMode">Edit content</h4>
+						<h4 class="modal-title" ng-if="!isEditMode">Add content</h4>
 					</div>
 					<div class="modal-body">
 						<form role="form">
@@ -210,12 +201,9 @@
 								<label for="">Category</label>
 								<select class="form-control" name="category" ng-model="manageVol.volumeID">
 	                              <option value="" disabled>Select Category</option>
-	                              <option  ng-repeat="category in allCategory" value="{{category.volumeID}}">{{category.name}}</option>                          
+	                              <option  ng-repeat="category in allCategory" value="{{category.volumeID}}" ng-selected="manageVol.volumeID ==category.volumeID">{{category.name}}</option>                          
 	                            </select>
-	                            <!-- <select class="form-control" name="category"  ng-model="selectedCategory" ng-change="onCategoryChange(selectedCategory)" ng-options="category.name for category in allCategory track by category.id" required>
-			                        <option value="" disabled>Select Category</option>
-			                    </select> -->
-                            </div>
+	                        </div>
 							<button type="submit"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
 						</form>
 					</div>
@@ -329,7 +317,8 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Add New Word</h4>
+							<h4 class="modal-title" ng-if="isEditMode">Edit Word</h4>
+							<h4 class="modal-title" ng-if="!isEditMode">Add New Word</h4>
 						</div>
 						<div class="modal-body">
 							<form action="" method="POST" role="form">

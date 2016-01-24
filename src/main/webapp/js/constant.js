@@ -1,5 +1,5 @@
 var servicePath = {};
-servicePath["fileUpload"] = "/api/file/save";
+servicePath["fileUpload"] = "/DictionaryApp/rest/service/file/upload";
 
 servicePath["getVolumes"] = "/DictionaryApp/rest/service/volume/";
 
@@ -22,3 +22,5 @@ servicePath["getnewlyEditedWordData"] = "/DictionaryApp/rest/service/edited/word
 servicePath["updateNewlyEditedWord"] = "/DictionaryApp/rest/service/edited/word/update";
 servicePath["deletedNewlyEditedWord"] = "/DictionaryApp/rest/service/edited/word/delete/";
 servicePath["addNewlyEditedWord"] = "/DictionaryApp/rest/service/edited/word/"
+	
+servicePath["staticPath"] = "/static/";

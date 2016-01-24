@@ -19,12 +19,11 @@ angular.module('demoApp')
 	$scope.save = function(){
 		newsSvc.save($scope.news)
 		.then(function(res){
-			alert(res.message + "IN SAVING NEWS");
+			alert(res.message + " in Saving News");
 			vm.getNewes();
 		})
 		.catch(function(){
-			alert("ERROR IN SAVING NEWS");
+			alert("Error in Saving News");
 		});
 	}
-
 }]);

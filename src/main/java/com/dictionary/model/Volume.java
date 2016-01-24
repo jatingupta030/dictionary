@@ -14,7 +14,9 @@ public class Volume implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     int volumeID ;
     String name;
-
+    
+    String icon;
+    
     public int getVolumeID() {
         return volumeID;
     }
@@ -31,4 +33,12 @@ public class Volume implements Serializable{
         this.name = name;
     }
 
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+    
 }

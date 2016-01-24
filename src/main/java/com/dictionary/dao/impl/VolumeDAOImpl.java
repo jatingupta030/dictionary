@@ -70,6 +70,7 @@ public class VolumeDAOImpl implements VolumeDAO {
             editedVolume =(Volume) query.uniqueResult();
             if(editedVolume != null && volume != null) {
             	editedVolume.setName(volume.getName());
+            	editedVolume.setIcon(volume.getIcon());
             	session.update(editedVolume);
                 session.getTransaction().commit();
                 session.close();

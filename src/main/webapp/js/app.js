@@ -13,5 +13,7 @@ angular.module('demoApp',[
     $rootScope.changeTab = function(tab){
       $rootScope.tab = tab;      
     }
+    
+    $rootScope.staticPath = servicePath.staticPath;
   });
   
