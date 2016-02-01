@@ -58,6 +58,7 @@ angular.module('demoApp')
 		    });
 		}
 		$scope.isEditMode = false;
+		$scope.manageVol = {};
 	}
 
 	$scope.deleteClick = function(id){
@@ -69,6 +70,7 @@ angular.module('demoApp')
 	 	.catch(function(res){
 	 		alert("Error in Word Deletion");
 	 	});
+	 	$scope.manageVol = {};
  	}
 
     $scope.onCategoryChange = function(category){
@@ -82,4 +84,9 @@ angular.module('demoApp')
 	        return category == d.volumeID;
 	    });
   	}
+
+  	$scope.onClose = function(){
+        		$scope.isEditMode=false;
+        		$scope.manageVol = {};
+        	}
 }]);

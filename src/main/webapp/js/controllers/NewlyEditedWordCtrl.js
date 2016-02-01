@@ -47,7 +47,7 @@ angular.module('demoApp')
 		    });
 		}
 		$scope.isEditMode = false;
-		
+		$scope.newlyEditedWord = {};
 	}
 
 	$scope.deleteClick = function(id){
@@ -59,5 +59,11 @@ angular.module('demoApp')
 	 	.catch(function(res){
 	 		alert("Error in Word deletion");
 	 	});
+	 	$scope.newlyEditedWord = {};
  	}
+
+ 	$scope.onClose = function(){
+    		$scope.isEditMode=false;
+    		$scope.newlyEditedWord = {};
+    	}
 }]);

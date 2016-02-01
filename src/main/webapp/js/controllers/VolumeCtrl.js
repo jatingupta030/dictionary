@@ -35,6 +35,7 @@ $scope.save = function(){
  			if(res.data.message != "ERROR"){
  				vol.icon = res.data.message;
  	 			vm.save(vol);
+ 	 			$scope.volume = {};
  			}else{
  				alert("Error in file Upload")
  			}
@@ -72,7 +73,8 @@ vm.save = function(vol){
 	 		alert("Error in Saving Volume");
 	 	});
 	}
-	$scope.isEditMode=false;
+	$scope.volume = {};
+    $scope.isEditMode=false;
 }
  $scope.deleteVolume = function(id){
  	volumeSvc.deleteVolume(id)
@@ -83,6 +85,7 @@ vm.save = function(vol){
  	.catch(function(res){
  		alert("Error in Volume Deletion");
  	});
+ 	$scope.volume = {};
  }
 
 
@@ -95,4 +98,8 @@ vm.save = function(vol){
       });
   });
 
+	$scope.onClose = function(){
+		$scope.isEditMode=false;
+		$scope.volume = {};
+	}
 }]);

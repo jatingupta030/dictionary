@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Dictionary Application</title>
+		<title>Dictionary</title>
 
 		<!-- Bootstrap CSS -->
 		<link href="css/app.min.css" rel="stylesheet">
@@ -92,7 +92,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<button type="button" ng-click="onClose()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title" ng-if="isEditMode">Edit Volume</h4>
 							<h4 class="modal-title" ng-if="!isEditMode">Add Volume</h4>
 						</div>
@@ -180,7 +180,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="button" ng-click="onClose()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title" ng-if="isEditMode">Edit content</h4>
 						<h4 class="modal-title" ng-if="!isEditMode">Add content</h4>
 					</div>
@@ -316,7 +316,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<button type="button" ng-click="onClose()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title" ng-if="isEditMode">Edit Word</h4>
 							<h4 class="modal-title" ng-if="!isEditMode">Add New Word</h4>
 						</div>
