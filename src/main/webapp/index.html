@@ -108,7 +108,8 @@
 									<input type="file" name="" id="input" class="form-control" value="" required="required" title="" file-upload>
 									<span>{{volume.icon}}</span>
 								</div>
-								<button  ng-click="save()"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" >Submit</button>
+								<button ng-if="volSubmitDisabled"  ng-click="save()"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" disabled>Submit</button>
+								<button ng-if="!volSubmitDisabled"  ng-click="save()"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect">Submit</button>
 							</form>
 						</div>
 						
@@ -204,7 +205,8 @@
 	                              <option  ng-repeat="category in allCategory" value="{{category.volumeID}}" ng-selected="manageVol.volumeID ==category.volumeID">{{category.name}}</option>                          
 	                            </select>
 	                        </div>
-							<button type="submit"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
+							<button type="submit" ng-if="wordSubmitDisabled" disabled md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
+							<button type="submit" ng-if="!wordSubmitDisabled" md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
 						</form>
 					</div>
 					
@@ -332,7 +334,8 @@
 										<div class="form-group">
 									<label for="">Description</label>
 										<input type="text" class="form-control" id="" ng-model="newlyEditedWord.description" placeholder="Input field">					</div>
-								<button type="submit"  md-ink-ripple="" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
+								<button type="submit"  md-ink-ripple="" ng-if="editedWordSubmitDisabled" disabled class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
+								<button type="submit"  md-ink-ripple="" ng-if="!editedWordSubmitDisabled" class="md-btn md-raised  btn-fw green waves-effect" ng-click="submitClick($event)">Submit</button>
 							</form>
 						</div>
 						

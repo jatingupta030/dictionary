@@ -6,6 +6,8 @@ angular.module('demoApp')
   $scope.volume = {};
   $scope.isEditMode = false;
   var icon = {};
+  $scope.volSubmitDisabled = false;
+
   vm.getVolumes = function(){
   		volumeSvc.getVolumes()
 		  .then(function(volms){
@@ -28,20 +30,24 @@ angular.module('demoApp')
  }
 
 $scope.save = function(){
+	$scope.volSubmitDisabled = true;
  	var vol = $scope.volume;
  	if(icon.file){
  		uploadSvc.upload(icon.file)
  		.then(function(res){
  			if(res.data.message != "ERROR"){
  				vol.icon = res.data.message;
+ 				$scope.volSubmitDisabled = false;
  	 			vm.save(vol);
  	 			$scope.volume = {};
  			}else{
- 				alert("Error in file Upload")
+ 				alert("Error in file Upload");
+ 				$scope.volSubmitDisabled = false;
  			}
  		})
  		.catch(function(res){
  			alert("Error in file Upload");
+ 			$scope.volSubmitDisabled = false;
  		});
  	}else{
  		vm.save(vol);
@@ -55,10 +61,12 @@ vm.save = function(vol){
 	 	.then(function(res){
 	 		$('#volume-edit').modal("hide");
 	 		alert("Volume Updated Successfully");
+	 		$scope.volSubmitDisabled = false;
 	 		vm.getVolumes();
 	 	})
 	 	.catch(function(){
 	 		$('#volume-edit').modal("hide");
+	 		$scope.volSubmitDisabled = false;
 	 		alert("Error in Volume Update");
 	 	});
 	}else{
@@ -66,11 +74,13 @@ vm.save = function(vol){
 	 	.then(function(res){
 	 		$('#volume-edit').modal("hide");
 	 		alert("Volume Saved Successfuly");
+	 		$scope.volSubmitDisabled = false;
 	 		vm.getVolumes();
 	 	})
 	 	.catch(function(){
 	 		$('#volume-edit').modal("hide");
 	 		alert("Error in Saving Volume");
+	 		$scope.volSubmitDisabled = false;
 	 	});
 	}
 	$scope.volume = {};

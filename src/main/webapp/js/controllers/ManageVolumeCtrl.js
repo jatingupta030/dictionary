@@ -7,6 +7,7 @@ angular.module('demoApp')
 	$scope.manageVol = {};
 	$scope.isSearch = false;
 	$scope.isEditMode= false;
+	$scope.wordSubmitDisabled = false;
 	var managev = this;
 
 	managev.getManageVol = function(){
@@ -35,26 +36,31 @@ angular.module('demoApp')
 	}
 
 	$scope.submitClick = function(evt) {
+	$scope.wordSubmitDisabled = true;
 		if(evt){
 	      evt.preventDefault();
 	    }
 		if($scope.isEditMode){
 			manageVolumeSvc.updateManageVolumes($scope.manageVol).then(function(result){
 				$('#editcontent').modal("hide");
+				$scope.wordSubmitDisabled = false;
 				alert("Word Successfully Updated");
 				managev.getManageVol();
 		      }).catch(function(err){
 			    throw err;
+			    $scope.wordSubmitDisabled = false;
 			    alert("Error in Word Updation");
 		    });
 		}else{
 			manageVolumeSvc.addDictionaryWord($scope.manageVol).then(function(result){
 				$('#editcontent').modal("hide");
 				alert("Word Successfully Added");
+				$scope.wordSubmitDisabled = false;
 				managev.getManageVol();
 		      }).catch(function(err){
 			    throw err;
 			    alert("Error in Word Addition");
+			    $scope.wordSubmitDisabled = false;
 		    });
 		}
 		$scope.isEditMode = false;

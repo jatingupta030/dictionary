@@ -18,7 +18,7 @@ import com.sun.jersey.multipart.FormDataParam;
 
 @Path("/service/file")
 public class FileUpload {
-	final static String UPLOAD_PATH = "d://uploaded/";
+	final static String UPLOAD_PATH = "/var/dictionaryApp/images/uploads/";
 	@POST
 	@Path("/upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)

@@ -6,6 +6,7 @@ angular.module('demoApp')
 	$scope.newlyEditedWord = {};
 	$scope.isEditMode = false;
 	var newlyWord = this;
+	$scope.editedWordSubmitDisabled = false;
 
 	newlyWord.getNewlyEditedWord = function(){
 	  	newlyEditedWordSvc.getnewlyEditedWordData().then(function(response){
@@ -26,6 +27,7 @@ angular.module('demoApp')
 	}
 
 	$scope.submitClick = function(evt) {
+		$scope.editedWordSubmitDisabled = true;
 		if(evt){
 	      evt.preventDefault();
 	    }
@@ -33,17 +35,21 @@ angular.module('demoApp')
 			newlyEditedWordSvc.updateNewlyEditedWord($scope.newlyEditedWord).then(function(result){
 				$('#add-word').modal("hide");
 				alert("Word Successfully Updated");
+				$scope.editedWordSubmitDisabled = false;
 				newlyWord.getNewlyEditedWord();
 		      }).catch(function(err){
 			    throw err;
+			    $scope.editedWordSubmitDisabled = false;
 		    });
 		}else{
 			newlyEditedWordSvc.addNewlyEditedWord($scope.newlyEditedWord).then(function(result){
 				$('#add-word').modal("hide");
 				alert("Word Successfully Added");
+				$scope.editedWordSubmitDisabled = false;
 				newlyWord.getNewlyEditedWord();
 		      }).catch(function(err){
 			    throw err;
+			    $scope.editedWordSubmitDisabled = false;
 		    });
 		}
 		$scope.isEditMode = false;
