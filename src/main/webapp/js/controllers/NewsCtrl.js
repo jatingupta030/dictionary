@@ -3,7 +3,7 @@ angular.module('demoApp')
 .controller('NewsCtrl',['$scope','newsSvc', function($scope,newsSvc) {
 	var vm = this;
 	$scope.news = {};
-	var icon = {};
+	$scope.addNewsDisabled = false;
 	vm.getNewes = function(){
 		newsSvc.getNewes()
 		.then(function(data){
@@ -17,13 +17,16 @@ angular.module('demoApp')
 	vm.getNewes();
 
 	$scope.save = function(){
+		$scope.addNewsDisabled = true;
 		newsSvc.save($scope.news)
 		.then(function(res){
 			alert(res.message + " in Saving News");
+			$scope.addNewsDisabled = false;
 			vm.getNewes();
 		})
 		.catch(function(){
 			alert("Error in Saving News");
+			$scope.addNewsDisabled = false;
 		});
 	}
 }]);

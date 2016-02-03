@@ -35,6 +35,7 @@ public class NewsDAOImpl implements NewsDAO{
         RSSFeedParser parser = new RSSFeedParser("http://timesofindia.indiatimes.com/rssfeeds/3942693.cms");
         Feed feeds = parser.readFeed();
         try{
+            deleteFeeds();
             for(FeedMessage feedMessage : feeds.getMessages()){
 
                 Session session = HibernateUtil.getSessionFactory().openSession();
@@ -52,5 +53,19 @@ public class NewsDAOImpl implements NewsDAO{
             response = "ERROR";
         }
         return response;
+    }
+
+    private void deleteFeeds(){
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            String hql = "delete from FeedMessage";
+            Query query = session.createQuery(hql);
+            query.executeUpdate();
+            session.getTransaction().commit();
+            session.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
