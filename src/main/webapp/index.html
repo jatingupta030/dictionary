@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 	<head>
-		<meta charset="utf-8">
+		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Dictionary</title>
@@ -237,14 +237,16 @@
         	<table class="table table-striped table-hover">
         		<thead class="bg-info">
         			<tr>
-        				<th class="col-sm-6">Title</th>
-        				<th class="col-sm-6">Description</th>
+        				<th class="col-sm-4">Title</th>
+        				<th class="col-sm-4">Description</th>
+        				<th class="col-sm-4">Published Date</th>
         			</tr>
         		</thead>
         		<tbody>
         			<tr ng-repeat="news in newes">
         				<td>{{news.title}}</td>
-        				<td>{{news.description}}</td>
+        				<td>{{news.description}}&nbsp;&nbsp;<a href="{{news.link}}" target="_blank">Read More...</a></td>
+        				<td>{{news.publishDate}}</td>
         			</tr>
         		</tbody>
         	</table>

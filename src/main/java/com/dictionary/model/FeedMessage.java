@@ -22,6 +22,8 @@ public class FeedMessage implements Serializable{
 
     String guid;
 
+    String publishDate;
+    
     public int getMessageID() {
         return messageID;
     }
@@ -69,4 +71,13 @@ public class FeedMessage implements Serializable{
     public void setGuid(String guid) {
         this.guid = guid;
     }
+
+	public String getPublishDate() {
+		return publishDate;
+	}
+
+	public void setPublishDate(String publishDate) {
+		this.publishDate = publishDate;
+	}
+    
 }
